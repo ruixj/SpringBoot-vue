@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        <h2>{{ seckill.name }} <small>剩余：{{ seckill.number }}</small> </h2>
+    </div>
+    <div class="panel-body">
+        <h2 class="text-danger text-center" v-if="!result">
+            <span class="glyphicon glyphicon-time"></span>
+            <span v-if="showOver">秒杀结束！</span>
+            <countdown v-if="showCountdown" text="秒杀倒计时" :time="leftTime"></countdown>
+            <span v-if="showSeckill">
+                秒杀进行中！
+                <button class="btn btn-primary btn-lg" @click="execSeckill" v-bind:class="{ 'disabled': buttonDisabled }">立即秒杀</button>
+            </span>
+        </h2>
+        <h2 class="text-center" v-if="result">
+            秒杀结果: <span class="label" v-bind:class="[ seckillSuccess? 'label-success': 'label-danger']"> {{ result.stateInfo }}</span>
+        </h2>
+        <table v-if="result.successKilled" class="table">
+            <thead>
+            <tr>
+                <th>秒杀商品代号</th>
+                <th>手机</th>
+                <th>状态</th>
+                <th>时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ result.successKilled.seckillId }}</td>
+                <td>{{ result.successKilled.userPhone }}</td>
+                <td>{{ result.successKilled.state }}</td>
+                <td>{{ result.successKilled.createTime | localDateString}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <h3 class="text-center">
+            <span>开始时间：{{ seckill.startTime | localDateString }}</span>
+        </h3>
+        <h3 class="text-center">
+            <span>结束时间：{{ seckill.endTime | localDateString }}</span>
+        </h3>
+        <h3 class="text-center">
+            <span>现在时间：{{ exposer.now | localDateString }}</span>
+        </h3>
+    </div>
+</div>
