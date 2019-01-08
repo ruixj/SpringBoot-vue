@@ -40,3 +40,8 @@ spring:
            maxPoolPreparedStatementPerConnectionSize: 20
            connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.edu.crm.pojo
+
